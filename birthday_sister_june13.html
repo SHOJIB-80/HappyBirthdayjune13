@@ -1,0 +1,419 @@
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Nunito:wght@400;700;900&display=swap');
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body { background: transparent; }
+
+#bd-wrap {
+  min-height: 600px;
+  background: linear-gradient(135deg, #1a0533 0%, #2d0a52 40%, #0d1b4b 100%);
+  border-radius: 20px;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px 50px;
+  font-family: 'Nunito', sans-serif;
+}
+
+#canvas-bg {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  pointer-events: none;
+}
+
+.star {
+  position: absolute;
+  width: 3px; height: 3px;
+  background: white;
+  border-radius: 50%;
+  animation: twinkle 2s infinite alternate;
+  pointer-events: none;
+}
+
+@keyframes twinkle {
+  from { opacity: 0.2; transform: scale(1); }
+  to { opacity: 1; transform: scale(1.5); }
+}
+
+.balloon {
+  position: absolute;
+  bottom: -120px;
+  width: 50px;
+  height: 62px;
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  animation: floatUp linear infinite;
+  opacity: 0.9;
+}
+
+.balloon::after {
+  content: '';
+  position: absolute;
+  bottom: -18px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 1px;
+  height: 20px;
+  background: rgba(255,255,255,0.5);
+}
+
+@keyframes floatUp {
+  0% { transform: translateY(0) rotate(-5deg); }
+  25% { transform: translateY(-150px) rotate(5deg); }
+  50% { transform: translateY(-300px) rotate(-4deg); }
+  75% { transform: translateY(-450px) rotate(4deg); }
+  100% { transform: translateY(-650px) rotate(-3deg); opacity: 0; }
+}
+
+.name-banner {
+  position: relative;
+  z-index: 10;
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.happy-text {
+  font-family: 'Dancing Script', cursive;
+  font-size: 42px;
+  color: #ffda6b;
+  text-shadow: 0 0 20px rgba(255,200,50,0.8), 0 0 40px rgba(255,180,0,0.4);
+  animation: glow 2s ease-in-out infinite alternate;
+  display: block;
+  line-height: 1.2;
+}
+
+@keyframes glow {
+  from { text-shadow: 0 0 20px rgba(255,200,50,0.8), 0 0 40px rgba(255,180,0,0.4); }
+  to { text-shadow: 0 0 30px rgba(255,220,80,1), 0 0 60px rgba(255,200,50,0.8), 0 0 80px rgba(255,150,0,0.4); }
+}
+
+.birthday-text {
+  font-family: 'Dancing Script', cursive;
+  font-size: 52px;
+  color: #ff87d4;
+  text-shadow: 0 0 20px rgba(255,100,200,0.8), 0 0 40px rgba(220,50,180,0.5);
+  display: block;
+  animation: glow2 2s ease-in-out infinite alternate;
+  line-height: 1.2;
+}
+
+@keyframes glow2 {
+  from { text-shadow: 0 0 20px rgba(255,100,200,0.8), 0 0 40px rgba(220,50,180,0.5); }
+  to { text-shadow: 0 0 35px rgba(255,130,220,1), 0 0 65px rgba(255,100,200,0.8); }
+}
+
+.to-text {
+  font-size: 18px;
+  color: rgba(255,255,255,0.7);
+  margin: 4px 0;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.sister-name {
+  font-family: 'Dancing Script', cursive;
+  font-size: 58px;
+  background: linear-gradient(90deg, #ff87d4, #ffda6b, #87d4ff, #ff87d4);
+  background-size: 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 3s linear infinite;
+  display: block;
+}
+
+@keyframes shimmer {
+  0% { background-position: 0% }
+  100% { background-position: 200% }
+}
+
+#cake-wrap {
+  position: relative;
+  z-index: 10;
+  margin: 10px 0 20px;
+}
+
+#cake {
+  width: 180px;
+  filter: drop-shadow(0 10px 30px rgba(255,100,200,0.4));
+  animation: cakeBounce 3s ease-in-out infinite;
+}
+
+@keyframes cakeBounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+.date-badge {
+  position: relative;
+  z-index: 10;
+  background: rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.25);
+  border-radius: 50px;
+  padding: 8px 28px;
+  color: white;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  margin-bottom: 20px;
+  backdrop-filter: blur(4px);
+}
+
+.msg-box {
+  position: relative;
+  z-index: 10;
+  max-width: 420px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 16px;
+  padding: 18px 24px;
+  text-align: center;
+  color: rgba(255,255,255,0.9);
+  font-size: 16px;
+  line-height: 1.7;
+  backdrop-filter: blur(6px);
+}
+
+.hearts-row {
+  position: relative;
+  z-index: 10;
+  margin-top: 16px;
+  font-size: 24px;
+  letter-spacing: 8px;
+  animation: heartbeat 1.2s ease-in-out infinite;
+}
+
+@keyframes heartbeat {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.15); }
+}
+
+.confetti-piece {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 2px;
+  animation: confettiFall linear infinite;
+  pointer-events: none;
+  z-index: 5;
+}
+
+@keyframes confettiFall {
+  0% { transform: translateY(-20px) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(650px) rotate(720deg); opacity: 0; }
+}
+
+.sparkle {
+  position: absolute;
+  pointer-events: none;
+  animation: sparklePop 1.5s ease-in-out infinite;
+  font-size: 18px;
+  z-index: 6;
+}
+
+@keyframes sparklePop {
+  0%, 100% { opacity: 0; transform: scale(0.5); }
+  50% { opacity: 1; transform: scale(1.2); }
+}
+
+#name-input-row {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+  align-items: center;
+}
+
+#name-input-row input {
+  background: rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.3);
+  border-radius: 10px;
+  padding: 8px 14px;
+  color: white;
+  font-size: 15px;
+  font-family: 'Nunito', sans-serif;
+  outline: none;
+  width: 180px;
+}
+
+#name-input-row input::placeholder { color: rgba(255,255,255,0.4); }
+
+#name-input-row button {
+  background: linear-gradient(135deg, #ff87d4, #c050a0);
+  border: none;
+  border-radius: 10px;
+  padding: 8px 16px;
+  color: white;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  cursor: pointer;
+  transition: transform 0.15s;
+}
+
+#name-input-row button:hover { transform: scale(1.05); }
+
+.music-btn {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  z-index: 20;
+  background: rgba(255,255,255,0.15);
+  border: 1px solid rgba(255,255,255,0.3);
+  border-radius: 50%;
+  width: 40px; height: 40px;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  font-size: 18px;
+  transition: background 0.2s;
+}
+
+.music-btn:hover { background: rgba(255,255,255,0.25); }
+</style>
+
+<div id="bd-wrap">
+  <div class="music-btn" onclick="toggleMusic()" title="Toggle music">🎵</div>
+
+  <div id="name-input-row">
+    <input type="text" id="sisterInput" placeholder="Sister's name..." maxlength="18" />
+    <button onclick="setName()">Set name</button>
+  </div>
+
+  <div class="name-banner">
+    <span class="happy-text">Happy</span>
+    <span class="birthday-text">Birthday!</span>
+    <span class="to-text">to my amazing sister</span>
+    <span class="sister-name" id="sisterName">Sis ✨</span>
+  </div>
+
+  <div id="cake-wrap">
+    <svg id="cake" viewBox="0 0 180 160" xmlns="http://www.w3.org/2000/svg">
+      <ellipse cx="90" cy="140" rx="72" ry="12" fill="rgba(0,0,0,0.2)"/>
+      <rect x="20" y="105" width="140" height="38" rx="6" fill="#e8729a"/>
+      <rect x="20" y="105" width="140" height="38" rx="6" fill="none" stroke="#f9b4cc" stroke-width="1.5"/>
+      <rect x="25" y="75" width="130" height="34" rx="6" fill="#f4a0c0"/>
+      <rect x="25" y="75" width="130" height="34" rx="6" fill="none" stroke="#ffc8dc" stroke-width="1.5"/>
+      <rect x="30" y="52" width="120" height="26" rx="6" fill="#fbb8d0"/>
+      <ellipse cx="90" cy="52" rx="60" ry="9" fill="#fff5f8"/>
+      <path d="M30 75 Q40 68 50 75 Q60 68 70 75 Q80 68 90 75 Q100 68 110 75 Q120 68 130 75 Q140 68 150 75" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
+      <path d="M25 109 Q35 103 45 109 Q55 103 65 109 Q75 103 85 109 Q95 103 105 109 Q115 103 125 109 Q135 103 145 109 Q155 103 160 108" fill="none" stroke="#ffc8dc" stroke-width="2" stroke-linecap="round"/>
+      <circle cx="52" cy="50" r="4" fill="#ff87d4"/>
+      <circle cx="90" cy="48" r="4" fill="#ffda6b"/>
+      <circle cx="128" cy="50" r="4" fill="#87d4ff"/>
+      <rect x="50" y="24" width="4" height="28" rx="2" fill="#e06090"/>
+      <rect x="88" y="20" width="4" height="30" rx="2" fill="#c8a020"/>
+      <rect x="126" y="24" width="4" height="28" rx="2" fill="#4090d0"/>
+      <ellipse cx="52" cy="22" rx="5" ry="8" fill="#ffee44" opacity="0.9" id="f1"/>
+      <ellipse cx="90" cy="18" rx="5" ry="8" fill="#ffcc22" opacity="0.9" id="f2"/>
+      <ellipse cx="128" cy="22" rx="5" ry="8" fill="#ff9944" opacity="0.9" id="f3"/>
+      <text x="90" y="130" text-anchor="middle" font-family="Nunito" font-size="11" font-weight="700" fill="white" opacity="0.8">June 13 🎂</text>
+    </svg>
+  </div>
+
+  <div class="date-badge">🗓️ JUNE 13, 2025</div>
+
+  <div class="msg-box" id="msgBox">
+    Wishing you a day as bright and beautiful as you are.<br>
+    May all your dreams come true this year — you deserve every happiness! 💖
+  </div>
+
+  <div class="hearts-row">💖 💕 💗 💖 💕</div>
+</div>
+
+<audio id="audio" loop>
+  <source src="https://upload.wikimedia.org/wikipedia/commons/5/51/Happy_Birthday_-_English.ogg" type="audio/ogg">
+</audio>
+
+<script>
+const wrap = document.getElementById('bd-wrap');
+const W = 680, H = 600;
+
+const starColors = ['#fff','#ffe8b0','#ffc8e8','#b8d8ff'];
+for(let i=0;i<50;i++){
+  const s=document.createElement('div');
+  s.className='star';
+  s.style.left=Math.random()*100+'%';
+  s.style.top=Math.random()*100+'%';
+  s.style.animationDelay=Math.random()*3+'s';
+  s.style.animationDuration=(1.5+Math.random()*2.5)+'s';
+  s.style.background=starColors[Math.floor(Math.random()*starColors.length)];
+  const sz=(1+Math.random()*3)+'px';
+  s.style.width=sz;s.style.height=sz;
+  wrap.appendChild(s);
+}
+
+const balloonColors=['#ff87d4','#ffda6b','#87d4ff','#b87fff','#ff9966','#66ffcc'];
+for(let i=0;i<8;i++){
+  const b=document.createElement('div');
+  b.className='balloon';
+  b.style.left=(5+Math.random()*90)+'%';
+  b.style.background=balloonColors[i%balloonColors.length];
+  const dur=(8+Math.random()*8)+'s';
+  b.style.animationDuration=dur;
+  b.style.animationDelay=(Math.random()*8)+'s';
+  wrap.appendChild(b);
+}
+
+const confColors=['#ff87d4','#ffda6b','#87d4ff','#b87fff','#ff9966','#ff4466','#44ffaa'];
+for(let i=0;i<25;i++){
+  const c=document.createElement('div');
+  c.className='confetti-piece';
+  c.style.left=Math.random()*100+'%';
+  c.style.top=Math.random()*100+'%';
+  c.style.background=confColors[Math.floor(Math.random()*confColors.length)];
+  c.style.animationDuration=(4+Math.random()*6)+'s';
+  c.style.animationDelay=(Math.random()*6)+'s';
+  c.style.width=(6+Math.random()*8)+'px';
+  c.style.height=(6+Math.random()*8)+'px';
+  c.style.borderRadius=Math.random()>0.5?'50%':'2px';
+  wrap.appendChild(c);
+}
+
+const sparkles=['✨','⭐','💫','🌟'];
+for(let i=0;i<8;i++){
+  const sp=document.createElement('div');
+  sp.className='sparkle';
+  sp.style.left=(5+Math.random()*90)+'%';
+  sp.style.top=(5+Math.random()*80)+'%';
+  sp.textContent=sparkles[Math.floor(Math.random()*sparkles.length)];
+  sp.style.animationDelay=(Math.random()*2)+'s';
+  sp.style.animationDuration=(1+Math.random()*1.5)+'s';
+  wrap.appendChild(sp);
+}
+
+function flickerFlames(){
+  ['f1','f2','f3'].forEach((id,idx)=>{
+    const f=document.getElementById(id);
+    if(!f)return;
+    setInterval(()=>{
+      const s=0.8+Math.random()*0.5;
+      const dx=(Math.random()-0.5)*3;
+      f.setAttribute('transform',`translate(${dx},0) scale(1,${s})`);
+    },150+idx*30);
+  });
+}
+flickerFlames();
+
+function setName(){
+  const val=document.getElementById('sisterInput').value.trim();
+  if(val) document.getElementById('sisterName').textContent=val+' ✨';
+}
+
+document.getElementById('sisterInput').addEventListener('keydown',e=>{
+  if(e.key==='Enter') setName();
+});
+
+let playing=false;
+function toggleMusic(){
+  const a=document.getElementById('audio');
+  if(!a.src||a.networkState===3){ return; }
+  if(playing){ a.pause(); playing=false; }
+  else { a.play().catch(()=>{}); playing=true; }
+}
+</script>
